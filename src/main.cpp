@@ -116,6 +116,8 @@ class Player {
         }
 
         void update() {
+
+            
             if(bn::keypad::right_held()) {
                 sprite.set_x(sprite.x() + x_speed);
             }
@@ -148,11 +150,12 @@ int main() {
     // Create a player and initialize it
     // TODO: we will move the initialization logic to a constructor.
     Player player = Player();
-    player.sprite.set_x(44);
-    player.sprite.set_y(22);
-    player.x_speed = 1.5;
-    player.size = PLAYER_SIZE;
-    player.bounding_box = create_bounding_box(player.sprite, player.size);
+    
+    // player.sprite.set_x(44);
+    // player.sprite.set_y(22);
+    // player.x_speed = 1.5;
+    // player.size = PLAYER_SIZE;
+    // player.bounding_box = create_bounding_box(player.sprite, player.size);
 
     bn::sprite_ptr enemy_sprite = bn::sprite_items::square.create_sprite(-30, 22);
     bn::rect enemy_bounding_box = create_bounding_box(enemy_sprite, ENEMY_SIZE);
