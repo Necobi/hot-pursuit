@@ -100,26 +100,43 @@ class ScoreDisplay {
 
 class Player {
     public:
+        bn::sprite_ptr sprite;
+        bn::fixed x_speed;
+        bn::fixed y_speed;
+        bn::size size;
         /**
          * Update the position and bounding box of the player based on d-pad movement.
          */
+
+         Player(bn::fixed x_start, bn::fixed y_start):
+         sprite(bn::sprite_items::dot.create_sprite(x_start,y_start)),
+         x_speed(2),y_speed(2),
+         size(PLAYER_SIZE)
+        {
+        }
+
         void update() {
             if(bn::keypad::right_held()) {
-                sprite.set_x(sprite.x() + speed);
+                sprite.set_x(sprite.x() + x_speed);
             }
             if(bn::keypad::left_held()) {
-                sprite.set_x(sprite.x() - speed);
+                sprite.set_x(sprite.x() - x_speed);
             }
             // TODO: Add logic for up and down
 
             bounding_box = create_bounding_box(sprite, size);
         }
 
-        // Create the sprite. This will be moved to a constructor
-        bn::sprite_ptr sprite = bn::sprite_items::dot.create_sprite();
-        bn::fixed speed; // The speed of the player
-        bn::size size; // The width and height of the sprite
-        bn::rect bounding_box; // The rectangle around the sprite for checking collision
+        
+
+       
+
+
+        // // Create the sprite. This will be moved to a constructor
+        // bn::sprite_ptr sprite = bn::sprite_items::dot.create_sprite();
+        // bn::fixed speed; // The speed of the player
+        // bn::size size; // The width and height of the sprite
+         bn::rect bounding_box; // The rectangle around the sprite for checking collision
 };
 
 int main() {
@@ -133,7 +150,7 @@ int main() {
     Player player = Player();
     player.sprite.set_x(44);
     player.sprite.set_y(22);
-    player.speed = 1.5;
+    player.x_speed = 1.5;
     player.size = PLAYER_SIZE;
     player.bounding_box = create_bounding_box(player.sprite, player.size);
 
