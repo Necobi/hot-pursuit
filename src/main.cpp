@@ -151,8 +151,9 @@ public:
         }
                 
 
-        if (bn::keypad::right_held())
+        if (bn::keypad::right_held() )
         {
+
             sprite.set_x(sprite.x() + x_speed);
         }
         if (bn::keypad::left_held())
@@ -195,11 +196,33 @@ class Enemy{
     }
 
     void update(Player& player){
-       
-    }
+        if (bn::keypad::right_held())
+        {
+            sprite.set_x(sprite.x() + x_speed);
+        }
+        if (bn::keypad::left_held())
+        {
+            sprite.set_x(sprite.x() - x_speed);
+        }
+        // TODO: Add logic for up and down
+        if (bn::keypad::up_held())
+        {
+            sprite.set_y(sprite.y() - y_speed);
+        }
+        if (bn::keypad::down_held())
+        {
+            sprite.set_y(sprite.y() + y_speed);
+        }
+
         bounding_box = create_bounding_box(sprite, size);
 
+        
+
+       
+
     }
+
+    
 
 
       bn::rect bounding_box;
