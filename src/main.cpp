@@ -126,8 +126,9 @@ public:
 
         
 
-        if (bn::keypad::right_held())
+        if (bn::keypad::right_held() )
         {
+
             sprite.set_x(sprite.x() + x_speed);
         }
         if (bn::keypad::left_held())
@@ -163,34 +164,42 @@ class Enemy{
      bn::size size;
 
          Enemy(bn::fixed x_start, bn::fixed y_start) : sprite(bn::sprite_items::square.create_sprite(x_start, y_start)),
-                                                   x_speed(1.5), y_speed(1.5),
+                                                   x_speed(2.5), y_speed(2.5),
                                                    size(ENEMY_SIZE)
     {
         //bounding_box = create_bounding_box(sprite, size);
     }
 
     void update(Player& player){
-        if (bn::keypad::right_held())
+        if (player.sprite.x() +20 > sprite.x())
         {
             sprite.set_x(sprite.x() + x_speed);
         }
-        if (bn::keypad::left_held())
+       
+        if (player.sprite.x() -20 < sprite.x())
         {
-            sprite.set_x(sprite.x() - x_speed);
+            sprite.set_x(sprite.x() - x_speed) ;
         }
         // TODO: Add logic for up and down
-        if (bn::keypad::up_held())
-        {
-            sprite.set_y(sprite.y() - y_speed);
-        }
-        if (bn::keypad::down_held())
-        {
-            sprite.set_y(sprite.y() + y_speed);
-        }
+        if (player.sprite.y()+20> sprite.y())
+         {
+            sprite.set_y(sprite.y()  + y_speed) ;
+         }
+
+         if (player.sprite.y() -20 < sprite.y())
+         {
+             sprite.set_y(sprite.y() - y_speed);
+         }
 
         bounding_box = create_bounding_box(sprite, size);
 
+        
+
+       
+
     }
+
+    
 
 
       bn::rect bounding_box;
