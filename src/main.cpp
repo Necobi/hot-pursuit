@@ -159,14 +159,37 @@ class Enemy{
     public:
      bn::sprite_ptr sprite;
      bn::fixed x_speed;
-    bn::fixed y_speed;
+     bn::fixed y_speed;
      bn::size size;
 
          Enemy(bn::fixed x_start, bn::fixed y_start) : sprite(bn::sprite_items::square.create_sprite(x_start, y_start)),
-                                                   x_speed(2), y_speed(2),
+                                                   x_speed(1.5), y_speed(1.5),
                                                    size(ENEMY_SIZE)
     {
+        //bounding_box = create_bounding_box(sprite, size);
+    }
+
+    void update(Player& player){
+        if (bn::keypad::right_held())
+        {
+            sprite.set_x(sprite.x() + x_speed);
+        }
+        if (bn::keypad::left_held())
+        {
+            sprite.set_x(sprite.x() - x_speed);
+        }
+        // TODO: Add logic for up and down
+        if (bn::keypad::up_held())
+        {
+            sprite.set_y(sprite.y() - y_speed);
+        }
+        if (bn::keypad::down_held())
+        {
+            sprite.set_y(sprite.y() + y_speed);
+        }
+
         bounding_box = create_bounding_box(sprite, size);
+
     }
 
 
@@ -191,6 +214,7 @@ int main()
     while (true)
     {
         player.update();
+        enemy.update(player);
 
         // Reset the current score and player position if the player collides with enemy
         if (enemy.bounding_box.intersects(player.bounding_box))
