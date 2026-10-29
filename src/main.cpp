@@ -188,6 +188,7 @@ class Enemy{
      bn::fixed x_speed;
      bn::fixed y_speed;
      bn::size size;
+     bn::random rng;
     
         
          Enemy(bn::fixed x_start, bn::fixed y_start) : sprite(bn::sprite_items::square.create_sprite(x_start, y_start)),
@@ -205,7 +206,7 @@ class Enemy{
        if (player.sprite.x() -20 < sprite.x())
         {
             sprite.set_x(sprite.x() - x_speed);
-             ;
+             
         }
         // TODO: Add logic for up and down
         if (player.sprite.y()+20> sprite.y())
@@ -220,16 +221,30 @@ class Enemy{
 
         bounding_box = create_bounding_box(sprite, size);
 
-        
-       
-       
+
+        if(bounding_box.intersects(player.bounding_box))
+        {
+            //scoreDisplay.resetScore();
+            //player.sprite.set_x(44);
+            //player.sprite.set_y(22);
+
+            sprite.set_x(rng.get_int(-150,150));
+            sprite.set_y(rng.get_int(-80,80));
+            bounding_box = create_bounding_box(sprite, size);
+
+        }
 
     }
+
+ bn::rect bounding_box;
 
     
 
 
-      bn::rect bounding_box;
+    
+
+
+     
 };
 
 int main()
@@ -257,7 +272,7 @@ int main()
         
 
         // Reset the current score and player position if the player collides with enemy
-        if (enemy.bounding_box.intersects(player.bounding_box))
+       /* if (enemy.bounding_box.intersects(player.bounding_box))
         {
             scoreDisplay.resetScore();
             player.sprite.set_x(44);
@@ -266,7 +281,7 @@ int main()
             enemy.sprite.set_x(rng.get_int(-150,150));
             enemy.sprite.set_y(rng.get_int(-80,80));
 
-        }
+        }*/
 
         // Update the scores and disaply them
         scoreDisplay.update();
