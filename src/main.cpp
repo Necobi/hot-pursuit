@@ -189,6 +189,8 @@ class Enemy{
      bn::fixed y_speed;
      bn::size size;
      bn::random rng;
+     ScoreDisplay scoreDisplay = ScoreDisplay();
+
     
         
          Enemy(bn::fixed x_start, bn::fixed y_start) : sprite(bn::sprite_items::square.create_sprite(x_start, y_start)),
@@ -224,7 +226,7 @@ class Enemy{
 
         if(bounding_box.intersects(player.bounding_box))
         {
-            //scoreDisplay.resetScore();
+            scoreDisplay.resetScore();
             //player.sprite.set_x(44);
             //player.sprite.set_y(22);
 
@@ -233,7 +235,7 @@ class Enemy{
             bounding_box = create_bounding_box(sprite, size);
 
         }
-
+            scoreDisplay.update();
     }
 
  bn::rect bounding_box;
@@ -284,7 +286,7 @@ int main()
         }*/
 
         // Update the scores and disaply them
-        scoreDisplay.update();
+        //scoreDisplay.update();
 
         bn::core::update();
     }
