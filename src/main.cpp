@@ -23,6 +23,7 @@ static constexpr int MAX_X = bn::display::width() / 2;
 
 // Number of characters required to show two of the longest numer possible in an int (-2147483647)
 static constexpr int MAX_SCORE_CHARS = 22;
+static constexpr int MAX_ENEMIES = 10;
 
 // Score location
 static constexpr int SCORE_X = 70;
@@ -190,6 +191,7 @@ class Enemy{
      bn::size size;
      bn::random rng;
      ScoreDisplay scoreDisplay = ScoreDisplay();
+     
 
     
         
@@ -240,6 +242,13 @@ class Enemy{
 
  bn::rect bounding_box;
 
+ /*void add_enemy(bn::vector<Enemy, MAX_ENEMIES>& enemy, bn::fixed x_start ,bn::fixed y_start ){
+     // Only add if we're below the maximum
+            if(enemy.size() < enemy.max_size()) {
+                enemy.push_back(Enemy(x_start,y_start));
+                
+            }   
+}*/
     
 
 
@@ -251,6 +260,7 @@ class Enemy{
 
 int main()
 {
+    bn::vector<Enemy, MAX_ENEMIES> enemies = {};
     bn::core::init();
 
     // Create a new score display
@@ -266,6 +276,9 @@ int main()
     //bn::rect enemy_bounding_box = create_bounding_box(enemy_sprite, ENEMY_SIZE);
     //    bn::random& rng;
        bn::random rng;
+    //add_enemy(enemies,0,0);
+    Enemy manual =Enemy(0,0);
+
     while (true)
     {
         player.update();
