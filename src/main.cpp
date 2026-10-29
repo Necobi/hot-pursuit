@@ -6,6 +6,7 @@
 #include <bn_string.h>
 #include <bn_sprite_ptr.h>
 #include <bn_sprite_text_generator.h>
+#include <bn_random.h>
 
 #include "common_fixed_8x16_font.h"
 #include "bn_sprite_items_dot.h"
@@ -187,7 +188,8 @@ class Enemy{
      bn::fixed x_speed;
      bn::fixed y_speed;
      bn::size size;
-
+    
+        
          Enemy(bn::fixed x_start, bn::fixed y_start) : sprite(bn::sprite_items::square.create_sprite(x_start, y_start)),
                                                    x_speed(2.5), y_speed(2.5),
                                                    size(ENEMY_SIZE)
@@ -219,7 +221,7 @@ class Enemy{
         bounding_box = create_bounding_box(sprite, size);
 
         
-
+       
        
 
     }
@@ -241,14 +243,18 @@ int main()
     // TODO: we will move the initialization logic to a constructor.
     Player player = Player(0, 0);
     Enemy enemy=Enemy(40,-20);
+   
 
     //bn::sprite_ptr enemy_sprite = bn::sprite_items::square.create_sprite(-30, 22);
     //bn::rect enemy_bounding_box = create_bounding_box(enemy_sprite, ENEMY_SIZE);
-
+    //    bn::random& rng;
+       bn::random rng;
     while (true)
     {
         player.update();
         enemy.update(player);
+         
+        
 
         // Reset the current score and player position if the player collides with enemy
         if (enemy.bounding_box.intersects(player.bounding_box))
@@ -256,6 +262,10 @@ int main()
             scoreDisplay.resetScore();
             player.sprite.set_x(44);
             player.sprite.set_y(22);
+
+            enemy.sprite.set_x(rng.get_int(-150,150));
+            enemy.sprite.set_y(rng.get_int(-80,80));
+
         }
 
         // Update the scores and disaply them
