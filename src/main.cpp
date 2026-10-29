@@ -278,26 +278,42 @@ int main()
        bn::random rng;
     //add_enemy(enemies,0,0);
     Enemy manual =Enemy(0,0);
+    Enemy manual2 = Enemy(1,1);
+    Enemy manual3= Enemy(2,2);
+
+    enemies.push_back(manual);
+    enemies.push_back(manual2);
+    enemies.push_back(manual3);
+
+
 
     while (true)
     {
         player.update();
         enemy.update(player);
-         
+       
+        for (Enemy enemyy: enemies){
+            
+              if(enemyy.bounding_box.intersects(player.bounding_box))
+        {
+        
+            player.update();
+            enemy.update(player);
+
+            scoreDisplay.resetScore();
+            enemy.update(player);
+            player.sprite.set_x(50);
+            player.sprite.set_y(26);
+
+            enemyy.sprite.set_x(rng.get_int(-150,150));
+            enemyy.sprite.set_y(rng.get_int(-80,80));
+            
+        }
+        scoreDisplay.update();
+        }
         
 
-        // Reset the current score and player position if the player collides with enemy
-       /* if (enemy.bounding_box.intersects(player.bounding_box))
-        {
-            scoreDisplay.resetScore();
-            player.sprite.set_x(44);
-            player.sprite.set_y(22);
-
-            enemy.sprite.set_x(rng.get_int(-150,150));
-            enemy.sprite.set_y(rng.get_int(-80,80));
-
-        }*/
-
+        
         // Update the scores and disaply them
         //scoreDisplay.update();
 
