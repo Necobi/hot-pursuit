@@ -269,7 +269,7 @@ int main()
     // Create a player and initialize it
     // TODO: we will move the initialization logic to a constructor.
     Player player = Player(0, 0);
-    Enemy enemy=Enemy(40,-20);
+    //Enemy enemy=Enemy(40,-20);
    
 
     //bn::sprite_ptr enemy_sprite = bn::sprite_items::square.create_sprite(-30, 22);
@@ -277,9 +277,9 @@ int main()
     //    bn::random& rng;
        bn::random rng;
     //add_enemy(enemies,0,0);
-    Enemy manual =Enemy(0,0);
-    Enemy manual2 = Enemy(1,1);
-    Enemy manual3= Enemy(2,2);
+    Enemy manual =Enemy(15,35);
+    Enemy manual2 = Enemy(-25,19);
+    Enemy manual3= Enemy(-15,10);
 
     enemies.push_back(manual);
     enemies.push_back(manual2);
@@ -290,26 +290,12 @@ int main()
     while (true)
     {
         player.update();
-        enemy.update(player);
+        //enemyy.update(player);
        
         for (Enemy enemyy: enemies){
             
-              if(enemyy.bounding_box.intersects(player.bounding_box))
-        {
-        
-            player.update();
-            enemy.update(player);
-
-            scoreDisplay.resetScore();
-            enemy.update(player);
-            player.sprite.set_x(50);
-            player.sprite.set_y(26);
-
-            enemyy.sprite.set_x(rng.get_int(-150,150));
-            enemyy.sprite.set_y(rng.get_int(-80,80));
-            
-        }
-        scoreDisplay.update();
+          enemyy.update(player);
+       //scoreDisplay.update();
         }
         
 
