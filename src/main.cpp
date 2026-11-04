@@ -190,13 +190,14 @@ class Enemy{
      bn::fixed y_speed;
      bn::size size;
      bn::random rng;
+     bn::fixed speed;
      ScoreDisplay scoreDisplay = ScoreDisplay();
      
 
     
         
-         Enemy(bn::fixed x_start, bn::fixed y_start) : sprite(bn::sprite_items::square.create_sprite(x_start, y_start)),
-                                                   x_speed(2.5), y_speed(2.5),
+         Enemy(bn::fixed x_start, bn::fixed y_start,bn::fixed speed) : sprite(bn::sprite_items::square.create_sprite(x_start, y_start)),
+                                                   x_speed(speed), y_speed(speed),
                                                    size(ENEMY_SIZE)
     {
         //bounding_box = create_bounding_box(sprite, size);
@@ -277,9 +278,11 @@ int main()
     //    bn::random& rng;
        bn::random rng;
     //add_enemy(enemies,0,0);
-    Enemy manual =Enemy(15,35);
-    Enemy manual2 = Enemy(-25,19);
-    Enemy manual3= Enemy(-15,10);
+    Enemy manual =Enemy(15,35,1);
+    Enemy manual2 = Enemy(-25,19,1.5);
+    Enemy manual3= Enemy(-15,10,2);
+
+    
 
     enemies.push_back(manual);
     enemies.push_back(manual2);
@@ -292,7 +295,7 @@ int main()
         player.update();
         //enemyy.update(player);
        
-        for (Enemy enemyy: enemies){
+        for (Enemy& enemyy: enemies){
             
           enemyy.update(player);
        //scoreDisplay.update();
