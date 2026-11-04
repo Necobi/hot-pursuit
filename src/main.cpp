@@ -227,18 +227,18 @@ class Enemy{
         bounding_box = create_bounding_box(sprite, size);
 
 
-        if(bounding_box.intersects(player.bounding_box))
-        {
-            scoreDisplay.resetScore();
-            //player.sprite.set_x(44);
-            //player.sprite.set_y(22);
+        // if(bounding_box.intersects(player.bounding_box))
+        // {
+        //     scoreDisplay.resetScore();
+        //     //player.sprite.set_x(44);
+        //     //player.sprite.set_y(22);
 
-            sprite.set_x(rng.get_int(-150,150));
-            sprite.set_y(rng.get_int(-80,80));
-            bounding_box = create_bounding_box(sprite, size);
+        //     sprite.set_x(rng.get_int(-150,150));
+        //     sprite.set_y(rng.get_int(-80,80));
+        //     bounding_box = create_bounding_box(sprite, size);
 
-        }
-            scoreDisplay.update();
+        // }
+        //     scoreDisplay.update();
     }
 
  bn::rect bounding_box;
@@ -278,13 +278,13 @@ int main()
     //    bn::random& rng;
        bn::random rng;
     //add_enemy(enemies,0,0);
-    Enemy manual =Enemy(15,35,1);
+    //Enemy manual =Enemy(15,35,1);
    // Enemy manual2 = Enemy(-25,19,1.5);
     //Enemy manual3= Enemy(-15,10,2);
 
     
 
-    enemies.push_back(manual);
+    enemies.push_back(Enemy(15,35,1));
     //enemies.push_back(manual2);
     //enemies.push_back(manual3);
 // for adding enemies every x amount of frames
@@ -302,18 +302,29 @@ int main()
             }
             enemy_timer=0;
         }
-
+        bool player_collision=false;
 
         for (Enemy& enemyy: enemies){
             
           enemyy.update(player);
-       //scoreDisplay.update();
+    
+       if(enemyy.bounding_box.intersects(player.bounding_box)){
+        player_collision=true;
+       }
         }
-        
 
-        
+        if(player_collision){
+            scoreDisplay.resetScore();
+        player.sprite.set_x(44);
+        player.sprite.set_y(22);
+        player.bounding_box = create_bounding_box(player.sprite, player.size);
+        while(enemies.size() > 1) {
+                enemies.pop_back();
+        }
+
+    }
         // Update the scores and disaply them
-        //scoreDisplay.update();
+         scoreDisplay.update();
 
         bn::core::update();
     }
