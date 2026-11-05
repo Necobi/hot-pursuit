@@ -65,40 +65,24 @@ public:
     /**
      * Increases score by 1 and updates high score if needed. Displays score and high score.
      */
-    void update()
-    {
-        // increase score and update high score if this is the new highest
-        score++;
-        if (score > high_score)
-        {
-            high_score = score;
-        }
-
-        // Stop displaying previous scores
-        score_sprites.clear();
-
-        // Display new scores
-        show_number(SCORE_X, SCORE_Y, score);
-        show_number(HIGH_SCORE_X, HIGH_SCORE_Y, high_score);
-    }
+    void update();
+    
+        
+    
 
     /**
      * Displays a number at the given position
      */
-    void show_number(int x, int y, int number)
-    {
-        // Convert number to a string and then display it
-        bn::string<MAX_SCORE_CHARS> number_string = bn::to_string<MAX_SCORE_CHARS>(number);
-        text_generator.generate(x, y, number_string, score_sprites);
-    }
+    void show_number(int x, int y, int number);
+    
+        
+    
 
     /**
      * Sets score back to 0. Does NOT reset high score.
      */
-    void resetScore()
-    {
-        score = 0;
-    }
+    void resetScore();
+    
 
     int score;                                                 // current score
     int high_score;                                            // best core
