@@ -7,6 +7,7 @@
 #include <bn_sprite_ptr.h>
 #include <bn_sprite_text_generator.h>
 #include <bn_random.h>
+#include "bn_sound_items.h"
 
 #include "common_fixed_8x16_font.h"
 #include "bn_sprite_items_dot.h"
@@ -96,6 +97,7 @@ int main()
     
        if(enemyy.bounding_box.intersects(player.bounding_box)){
         player_collision=true;
+        bn::sound_items::victory_3.play();
        }
         }
 
