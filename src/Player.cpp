@@ -2,7 +2,8 @@
 #include "ScoreDisplay.h"
 #include "bn_sprite_items_dot.h"
 #include "bn_sprite_items_square.h"
-#include <bn_keypad.h>
+#include "boundingBox.h"
+//#include <bn_keypad.h>
 
 static constexpr bn::size PLAYER_SIZE = {8, 8};
 static constexpr bn::fixed PLAYER_SPEED = 2;
@@ -69,7 +70,9 @@ void Player:: returnToScreen(){
         {
             sprite.set_y(sprite.y() + y_speed);
         }
+
+         bounding_box = create_bounding_box(sprite, size);
     }
 
-        //bounding_box = create_bounding_box(sprite, size);
+       
 

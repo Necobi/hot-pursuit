@@ -1,9 +1,21 @@
 #include "ScoreDisplay.h"
+#include "Enemy.h"
+#include "Player.h"
+#include "common_fixed_8x16_font.h"
 
-ScoreDisplay::ScoreDisplay (score(0),                                                             
+static constexpr int MAX_SCORE_CHARS = 22;
+//Score location
+static constexpr int SCORE_X = 70;
+static constexpr int SCORE_Y = -70;
+
+// High score location
+static constexpr int HIGH_SCORE_X = -70;
+static constexpr int HIGH_SCORE_Y = -70;
+
+ScoreDisplay::ScoreDisplay ():score(0),                                                             
                      high_score(0),                                                            
                      score_sprites(bn::vector<bn::sprite_ptr, MAX_SCORE_CHARS>()),             
-                     text_generator(bn::sprite_text_generator(common::fixed_8x16_sprite_font)) )
+                     text_generator(bn::sprite_text_generator(common::fixed_8x16_sprite_font)) 
     {
     }
 
@@ -24,7 +36,7 @@ ScoreDisplay::ScoreDisplay (score(0),
     }
 
 
-void ScoreeDisplay:: show_number( int x, int y, int numbebr){
+void ScoreDisplay:: show_number( int x, int y, int number){
     // Convert number to a string and then display it
         bn::string<MAX_SCORE_CHARS> number_string = bn::to_string<MAX_SCORE_CHARS>(number);
         text_generator.generate(x, y, number_string, score_sprites);

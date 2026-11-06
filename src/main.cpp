@@ -14,6 +14,8 @@
 
 #include "Player.h"
 #include "ScoreDisplay.h"
+#include "Enemy.h"
+#include "boundingBox.h"
 
 // Width and height of the the player bounding box
 static constexpr bn::size PLAYER_SIZE = {8, 8};
@@ -36,123 +38,16 @@ static constexpr int SCORE_Y = -70;
 static constexpr int HIGH_SCORE_X = -70;
 static constexpr int HIGH_SCORE_Y = -70;
 
-/**
- * Creates a rectangle centered at a sprite's location with a given size.
- * sprite the sprite to center the box around
- * box_size the dimensions of the bounding box
- */
-bn::rect create_bounding_box(bn::sprite_ptr sprite, bn::size box_size)
-{
-    return bn::rect(sprite.x().round_integer(),
-                    sprite.y().round_integer(),
-                    box_size.width(),
-                    box_size.height());
-}
 
-/**
- * Displays a score and high score.
- *
- * Score starts a 0 and is increased each time update is called, and reset to 0 when resetScore is
- * called. High score tracks the highest score ever reached.
- */
-class ScoreDisplay
-{
-public:
-    ScoreDisplay() : score(0),                                                                 // Start score at 0
-                     high_score(0),                                                            // Start high score at 0
-                     score_sprites(bn::vector<bn::sprite_ptr, MAX_SCORE_CHARS>()),             // Start with empty vector for score sprites
-                     text_generator(bn::sprite_text_generator(common::fixed_8x16_sprite_font)) // Use a new text generator
-    {
-    }
-
-    
-
-
-    int score;                                                 // current score
-    int high_score;                                            // best core
-    bn::vector<bn::sprite_ptr, MAX_SCORE_CHARS> score_sprites; // Sprites to display scores
-    bn::sprite_text_generator text_generator;                  // Text generator for scores
-};
-
-
-class Enemy{
-    public:
-     bn::sprite_ptr sprite;
-     bn::fixed x_speed;
-     bn::fixed y_speed;
-     bn::size size;
-     bn::random rng;
    
-     ScoreDisplay scoreDisplay = ScoreDisplay();
-     
 
-    
-        
-         Enemy(bn::fixed x_start, bn::fixed y_start,bn::fixed speed) : sprite(bn::sprite_items::square.create_sprite(x_start, y_start)),
-                                                   x_speed(speed), y_speed(speed),
-                                                   size(ENEMY_SIZE)
-    {
-        bounding_box = create_bounding_box(sprite, size);
-    }
-
-    void update(Player& player){
-        if (player.sprite.x() +20 > sprite.x())
-        {
-            sprite.set_x(sprite.x() + x_speed);
-        }
-       if (player.sprite.x() -20 < sprite.x())
-        {
-            sprite.set_x(sprite.x() - x_speed);
-             
-        }
-        // TODO: Add logic for up and down
-        if (player.sprite.y()+20> sprite.y())
-         {
-            sprite.set_y(sprite.y()  + y_speed) ;
-         }
-
-         if (player.sprite.y() -20 < sprite.y())
-         {
-             sprite.set_y(sprite.y() - y_speed);
-         }
-
-        bounding_box = create_bounding_box(sprite, size);
-
-
-        // if(bounding_box.intersects(player.bounding_box))
-        // {
-        //     scoreDisplay.resetScore();
-        //     //player.sprite.set_x(44);
-        //     //player.sprite.set_y(22);
-
-        //     sprite.set_x(rng.get_int(-150,150));
-        //     sprite.set_y(rng.get_int(-80,80));
-        //     bounding_box = create_bounding_box(sprite, size);
-
-        // }
-        //     scoreDisplay.update();
-    }
-
- bn::rect bounding_box;
-
- /*void add_enemy(bn::vector<Enemy, MAX_ENEMIES>& enemy, bn::fixed x_start ,bn::fixed y_start ){
-     // Only add if we're below the maximum
-            if(enemy.size() < enemy.max_size()) {
-                enemy.push_back(Enemy(x_start,y_start));
-                
-            }   
-}*/
-    
-
-
-    
-
-
-     
-};
 
 int main()
+
 {
+
+   
+
     bn::vector<Enemy, MAX_ENEMIES> enemies = {};
     bn::core::init();
 
@@ -181,10 +76,13 @@ int main()
     //enemies.push_back(manual3);
 // for adding enemies every x amount of frames
     int enemy_timer=0;
+    
 
     while (true)
     {
-        player.update();
+        player.returnToScreen();
+        player.speed();
+        
         //enemyy.update(player);
        enemy_timer++;
         if (enemy_timer >=150){
@@ -217,7 +115,11 @@ int main()
     }
         // Update the scores and disaply them
          scoreDisplay.update();
-
+        
         bn::core::update();
+
     }
+
+   
+    
 }
