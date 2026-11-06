@@ -106,7 +106,7 @@ int main()
         player.sprite.set_x(44);
         player.sprite.set_y(22);
         player.bounding_box = create_bounding_box(player.sprite, player.size);
-        while(enemies.size() > 0) {
+        while(enemies.size() > 1) {
                 enemies.pop_back();
         }
 
