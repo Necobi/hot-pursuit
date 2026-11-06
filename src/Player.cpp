@@ -18,6 +18,7 @@ Player:: Player(bn::fixed x_start, bn::fixed y_start) :
             x_speed(PLAYER_SPEED),
              y_speed(PLAYER_SPEED),
             size(PLAYER_SIZE){
+                bounding_box = create_bounding_box(sprite, size);
         }
 
 void Player:: returnToScreen(){

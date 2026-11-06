@@ -13,7 +13,7 @@ Enemy::Enemy(bn::fixed x_start, bn::fixed y_start,bn::fixed speed) : sprite(bn::
                                                    x_speed(speed), y_speed(speed),
                                                    size(ENEMY_SIZE)
     {
-        create_bounding_box(sprite, size);
+        //create_bounding_box(sprite, size);
     }
 
     void Enemy:: update(Player& player){
@@ -37,9 +37,9 @@ Enemy::Enemy(bn::fixed x_start, bn::fixed y_start,bn::fixed speed) : sprite(bn::
              sprite.set_y(sprite.y() - y_speed);
          }
 
-        create_bounding_box(sprite, size);
+       bounding_box = create_bounding_box(sprite, size);
 
        
     }
-    bn::rect bounding_box;
+    //bn::rect bounding_box;
     

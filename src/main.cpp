@@ -18,13 +18,13 @@
 #include "boundingBox.h"
 
 // Width and height of the the player bounding box
-static constexpr bn::size PLAYER_SIZE = {8, 8};
-static constexpr bn::size ENEMY_SIZE = {8, 8};
+//static constexpr bn::size PLAYER_SIZE = {8, 8};
+//static constexpr bn::size ENEMY_SIZE = {8, 8};
 
-static constexpr int MIN_Y = -bn::display::height() / 2;
+/*static constexpr int MIN_Y = -bn::display::height() / 2;
 static constexpr int MAX_Y = bn::display::height() / 2;
 static constexpr int MIN_X = -bn::display::width() / 2;
-static constexpr int MAX_X = bn::display::width() / 2;
+static constexpr int MAX_X = bn::display::width() / 2;*/
 
 // Number of characters required to show two of the longest numer possible in an int (-2147483647)
 //static constexpr int MAX_SCORE_CHARS = 22;
@@ -46,35 +46,23 @@ int main()
 
 {
 
-   
-
-    bn::vector<Enemy, MAX_ENEMIES> enemies = {};
     bn::core::init();
 
+    bn::vector<Enemy, MAX_ENEMIES> enemies = {};
+    
+
     // Create a new score display
-    ScoreDisplay scoreDisplay = ScoreDisplay();
+    ScoreDisplay scoreDisplay;
 
     // Create a player and initialize it
     // TODO: we will move the initialization logic to a constructor.
-    Player player = Player(0, 0);
-    //Enemy enemy=Enemy(40,-20);
-   
-
-    //bn::sprite_ptr enemy_sprite = bn::sprite_items::square.create_sprite(-30, 22);
-    //bn::rect enemy_bounding_box = create_bounding_box(enemy_sprite, ENEMY_SIZE);
-    //    bn::random& rng;
-       bn::random rng;
-    //add_enemy(enemies,0,0);
-    //Enemy manual =Enemy(15,35,1);
-   // Enemy manual2 = Enemy(-25,19,1.5);
-    //Enemy manual3= Enemy(-15,10,2);
-
+    Player player (0, 0);
     
+   
+       bn::random rng;
 
     enemies.push_back(Enemy(15,35,1));
-    //enemies.push_back(manual2);
-    //enemies.push_back(manual3);
-// for adding enemies every x amount of frames
+    
     int enemy_timer=0;
     
 
@@ -82,9 +70,9 @@ int main()
     {
         player.returnToScreen();
         player.speed();
-        
-        //enemyy.update(player);
        enemy_timer++;
+
+
         if (enemy_timer >=150){
             if(enemies.size()<MAX_ENEMIES){
                 enemies.push_back(Enemy(rng.get_int(-150,150),rng.get_int(-80,80),rng.get_int(1,4)));
@@ -92,7 +80,11 @@ int main()
             }
             enemy_timer=0;
         }
+
+
         bool player_collision=false;
+
+
 
         for (Enemy& enemyy: enemies){
             
@@ -103,16 +95,20 @@ int main()
        }
         }
 
+
+
         if(player_collision){
-            scoreDisplay.resetScore();
+        scoreDisplay.resetScore();
         player.sprite.set_x(44);
         player.sprite.set_y(22);
         player.bounding_box = create_bounding_box(player.sprite, player.size);
-        while(enemies.size() > 1) {
+        while(enemies.size() > 0) {
                 enemies.pop_back();
         }
 
     }
+
+
         // Update the scores and disaply them
          scoreDisplay.update();
         

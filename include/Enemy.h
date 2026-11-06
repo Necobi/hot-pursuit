@@ -20,7 +20,7 @@ class Enemy{
   
          Enemy(bn::fixed x_start, bn::fixed y_start,bn::fixed speed);
 
-         //ScoreDisplay scoreDisplay = ScoreDisplay();
+         //ScoreDisplay score_display= ScoreDisplay();
 
          void update(Player& player);
 };
