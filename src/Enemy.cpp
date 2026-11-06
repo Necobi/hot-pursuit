@@ -1,15 +1,15 @@
 #include "Enemy.h"
 #include "Player.h"
 #include "ScoreDisplay.h"
-#include "bn_sprite_items_dot.h"
-#include "bn_sprite_items_square.h"
+#include "bn_sprite_items_cat.h"
+#include "bn_sprite_items_mouse.h"
 #include "boundingBox.h"
 
 
 
 static constexpr bn::size ENEMY_SIZE = {8, 8};
 
-Enemy::Enemy(bn::fixed x_start, bn::fixed y_start,bn::fixed speed) : sprite(bn::sprite_items::square.create_sprite(x_start, y_start)),
+Enemy::Enemy(bn::fixed x_start, bn::fixed y_start,bn::fixed speed) : sprite(bn::sprite_items::cat.create_sprite(x_start, y_start)),
                                                    x_speed(speed), y_speed(speed),
                                                    size(ENEMY_SIZE)
     {

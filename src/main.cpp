@@ -12,6 +12,10 @@
 #include "bn_sprite_items_dot.h"
 #include "bn_sprite_items_square.h"
 
+#include "bn_sprite_items_cat.h"
+#include "bn_sprite_items_mouse.h"
+
+
 #include "Player.h"
 #include "ScoreDisplay.h"
 #include "Enemy.h"

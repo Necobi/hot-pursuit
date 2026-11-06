@@ -1,7 +1,7 @@
 #include "Player.h"
 #include "ScoreDisplay.h"
-#include "bn_sprite_items_dot.h"
-#include "bn_sprite_items_square.h"
+#include "bn_sprite_items_cat.h"
+#include "bn_sprite_items_mouse.h"
 #include "boundingBox.h"
 //#include <bn_keypad.h>
 
@@ -14,7 +14,7 @@ static constexpr int MAX_X = bn::display::width() / 2;
 
 
 Player:: Player(bn::fixed x_start, bn::fixed y_start) : 
-            sprite(bn::sprite_items::dot.create_sprite(x_start, y_start)),
+            sprite(bn::sprite_items::mouse.create_sprite(x_start, y_start)),
             x_speed(PLAYER_SPEED),
              y_speed(PLAYER_SPEED),
             size(PLAYER_SIZE){
