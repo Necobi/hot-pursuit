@@ -12,6 +12,9 @@
 #include "bn_sprite_items_dot.h"
 #include "bn_sprite_items_square.h"
 
+#include "Player.h"
+#include "ScoreDisplay.h"
+
 // Width and height of the the player bounding box
 static constexpr bn::size PLAYER_SIZE = {8, 8};
 static constexpr bn::size ENEMY_SIZE = {8, 8};
@@ -62,108 +65,13 @@ public:
     {
     }
 
-    /**
-     * Increases score by 1 and updates high score if needed. Displays score and high score.
-     */
-    void update();
-    
-        
     
 
-    /**
-     * Displays a number at the given position
-     */
-    void show_number(int x, int y, int number);
-    
-        
-    
-
-    /**
-     * Sets score back to 0. Does NOT reset high score.
-     */
-    void resetScore();
-    
 
     int score;                                                 // current score
     int high_score;                                            // best core
     bn::vector<bn::sprite_ptr, MAX_SCORE_CHARS> score_sprites; // Sprites to display scores
     bn::sprite_text_generator text_generator;                  // Text generator for scores
-};
-
-class Player
-{
-public:
-    bn::sprite_ptr sprite;
-    bn::fixed x_speed;
-    bn::fixed y_speed;
-    bn::size size;
-    /**
-     * Update the position and bounding box of the player based on d-pad movement.
-     */
-
-    Player(bn::fixed x_start, bn::fixed y_start) : sprite(bn::sprite_items::dot.create_sprite(x_start, y_start)),
-                                                   x_speed(2), y_speed(2),
-                                                   size(PLAYER_SIZE)
-    {
-    }
-
-    void update()
-    {
-        // .x returns the horizontal position of the sprite
-        // If the sprite moves to the left, it will come back to the right.
-        if (sprite.x() < MIN_X)
-        {
-        // .set_x sets the horizontal position of the sprite
-        // just using the max/min/ already available
-        sprite.set_x(MAX_X);
-        }
-
-        // if sprite moves to the right, it will come back on the left
-        if (sprite.x() > MAX_X)
-        {
-        sprite.set_x(MIN_X);
-        }
-        // if sprite goes up,will show up again at the bottom
-        // .y returns the vertical position of the sprite
-        if (sprite.y() < MIN_Y)
-        {
-        // .set_y will set the vertical position of the sprite
-        sprite.set_y(MAX_Y);
-        }
-        // if sprite goes down it will come back from top of screen
-        if (sprite.y() > MAX_Y)
-        {
-        sprite.set_y(MIN_Y);
-        }
-                
-
-        if (bn::keypad::right_held() )
-        {
-
-            sprite.set_x(sprite.x() + x_speed);
-        }
-        if (bn::keypad::left_held())
-        {
-            sprite.set_x(sprite.x() - x_speed);
-        }
-        // TODO: Add logic for up and down
-        if (bn::keypad::up_held())
-        {
-            sprite.set_y(sprite.y() - y_speed);
-        }
-        if (bn::keypad::down_held())
-        {
-            sprite.set_y(sprite.y() + y_speed);
-        }
-
-        bounding_box = create_bounding_box(sprite, size);
-    }
-
-    // // Create the sprite. This will be moved to a constructor
-    // bn::sprite_ptr sprite = bn::sprite_items::dot.create_sprite();
-    // bn::fixed speed; // The speed of the player
-    // bn::size size; // The width and height of the sprite
-    bn::rect bounding_box; // The rectangle around the sprite for checking collision
 };
 
 
