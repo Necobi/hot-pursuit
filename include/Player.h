@@ -1,6 +1,7 @@
 #pragma once
 #include <bn_fixed_point.h>
 #include <bn_sprite_ptr.h>
+#include <bn_rect.h>
 
 
 class Player{

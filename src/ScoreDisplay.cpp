@@ -3,7 +3,7 @@
 #include "Player.h"
 #include "common_fixed_8x16_font.h"
 
-static constexpr int MAX_SCORE_CHARS = 22;
+//static constexpr int MAX_SCORE_CHARS = 22;
 //Score location
 static constexpr int SCORE_X = 70;
 static constexpr int SCORE_Y = -70;

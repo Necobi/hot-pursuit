@@ -3,6 +3,7 @@
 #include <bn_sprite_ptr.h>
 #include <bn_random.h>
 #include <bn_size.h>
+#include <bn_rect.h>
 #include <bn_keypad.h>
 
 #include "Player.h"
@@ -19,7 +20,7 @@ class Enemy{
   
          Enemy(bn::fixed x_start, bn::fixed y_start,bn::fixed speed);
 
-         ScoreDisplay scoreDisplay = ScoreDisplay();
+         //ScoreDisplay scoreDisplay = ScoreDisplay();
 
          void update(Player& player);
 };

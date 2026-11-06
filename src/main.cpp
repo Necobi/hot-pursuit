@@ -27,7 +27,7 @@ static constexpr int MIN_X = -bn::display::width() / 2;
 static constexpr int MAX_X = bn::display::width() / 2;
 
 // Number of characters required to show two of the longest numer possible in an int (-2147483647)
-static constexpr int MAX_SCORE_CHARS = 22;
+//static constexpr int MAX_SCORE_CHARS = 22;
 static constexpr int MAX_ENEMIES = 10;
 
 // Score location
